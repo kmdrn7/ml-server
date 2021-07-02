@@ -112,6 +112,14 @@
                             <td id="v6"></td>
                         </tr>
                         <tr>
+                            <th>Dockerfile</th>
+                            <td id="v7" style="white-space: pre-wrap;"></td>
+                        </tr>
+                        <tr>
+                            <th>Last Health Check</th>
+                            <td id="v8"></td>
+                        </tr>
+                        <tr>
                             <th>Created At</th>
                             <td id="vcreated"></td>
                         </tr>
@@ -187,7 +195,7 @@
                 targets: [5],
                 data: "status",
                 render: function(data){
-                    return data == 1 ? "Active" : "Inactive";
+                    return data == 1 ? "<div class='btn btn-sm btn-success'>Active</div>" : "<div class='btn btn-sm btn-warning'>Inactive</div>";
                 }
             },
             {
@@ -219,6 +227,8 @@
                         $('#v4').html(res.data.res.os);
                         $('#v5').html(res.data.res.arch);
                         $('#v6').html(res.data.res.status == 1 ? 'Active':'Inactive');
+                        $('#v7').html(res.data.res.dockerfile);
+                        $('#v8').html(res.data.res.last_healthcheck);
                         $('#vcreated').html(res.data.res.created_at);
                         $('#vupdated').html(res.data.res.updated_at);
                         $('#viewModal').modal('show');

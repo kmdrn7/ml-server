@@ -15,6 +15,7 @@ class Sensor extends Model
         'status',
         'os',
         'arch',
+        'dockerfile',
         'healthcheck'
     ];
 }

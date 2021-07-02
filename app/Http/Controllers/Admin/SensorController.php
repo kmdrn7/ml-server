@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\InputValidator;
 use App\Http\Controllers\Controller;
+use App\Models\Dockerfile;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -59,12 +60,26 @@ class SensorController extends Controller
     {
         $input = InputValidator::validateRequest($request, [
             'name' => 'required|unique:sensor,name',
+            'os' => 'required',
+            'arch' => 'required',
         ]);
 
+        $serial = Str::uuid();
+        $dockerfile = Dockerfile::where('os', $request->os)->where('arch', $request->arch)->first()->dockerfile;
+        $dockerfile = str_replace(" ##\n", " $serial\n", $dockerfile);
+        $dockerfile = str_replace(" ###\n", " $request->interface\n", $dockerfile);
+        $dockerfile = str_replace(" ####\n", " $request->kafka_topic\n", $dockerfile);
+        $dockerfile = str_replace(" #####\n", " $request->kafka_host\n", $dockerfile);
+        $dockerfile = str_replace(" ######\n", " $request->kafka_port\n", $dockerfile);
+        $dockerfile = str_replace(" #######", " $request->mlserver", $dockerfile);
+
         Sensor::create([
-            'serial' => Str::uuid(),
+            'serial' => $serial,
             'name' => $input->name,
-            'status' => 1,
+            'os' => $input->os,
+            'arch' => $input->arch,
+            'status' => 0,
+            'dockerfile' => $dockerfile,
         ]);
 
         return redirect()->route('admin.sensor.index', ['input_status' => 'success']);

@@ -18,6 +18,7 @@
                                 <h1 class="text-center mb-0" style="font-size: 20px">FORM <small style="font-size: 18px">Tambah Data</small></h1>
                             </div>
                             <div class="card-body pb-1">
+                                <h5 class="">Informasi Sensor</h5>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -58,6 +59,65 @@
                                                 <small class="text-red">{{ $errors->first('arch') }}</small>
                                             @else
                                                 <small class="text-muted">Pilih Architecture</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <hr style="border-style: dashed">
+                                        <h5 class="">Environment Variables</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="interface">Listen Interface</label>
+                                            <input class="form-control" type="text" name="interface" id="interface" placeholder="" value="{{ old('interface') }}">
+                                            @if( $errors->first('interface') )
+                                                <small class="text-red">{{ $errors->first('interface') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan nama interface</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mlserver">ML Server URL</label>
+                                            <input class="form-control" type="text" name="mlserver" id="mlserver" placeholder="" value="{{ old('mlserver') }}">
+                                            @if( $errors->first('mlserver') )
+                                                <small class="text-red">{{ $errors->first('mlserver') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan alamat ml-server</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kafka_host">Kafka Host</label>
+                                            <input class="form-control" type="text" name="kafka_host" id="kafka_host" placeholder="" value="{{ old('kafka_host') }}">
+                                            @if( $errors->first('kafka_host') )
+                                                <small class="text-red">{{ $errors->first('kafka_host') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan host kafka</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kafka_port">Kafka Port</label>
+                                            <input class="form-control" type="text" name="kafka_port" id="kafka_port" placeholder="" value="{{ old('kafka_port') }}">
+                                            @if( $errors->first('kafka_port') )
+                                                <small class="text-red">{{ $errors->first('kafka_port') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan port kafka</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kafka_topic">Kafka Topic</label>
+                                            <input class="form-control" type="text" name="kafka_topic" id="kafka_topic" placeholder="" value="{{ old('kafka_topic') }}">
+                                            @if( $errors->first('kafka_topic') )
+                                                <small class="text-red">{{ $errors->first('kafka_topic') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan nama kafka topic</small>
                                             @endif
                                         </div>
                                     </div>
