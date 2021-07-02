@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"php.suggest.basic": false,
+		"editor.defaultFormatter": "junstyle.php-cs-fixer",
+		"files.autoSave": "onFocusChange"
+	}
+}

@@ -1,0 +1,100 @@
+/* html>body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+html>body::-webkit-scrollbar-thumb {
+    background: #FF0000;
+} */
+
+.plain-a {
+    text-decoration: none !important;
+}
+
+.fas {
+    font-size: 20px !important;
+    font-style: normal;
+    line-height: 1;
+}
+
+.fa-small {
+    font-size: 14px !important;
+}
+
+.card-btn-gap .btn {
+	margin: 3px 1px !important;
+}
+
+.btn-group-sm>.btn {
+    padding: .30rem .70rem !important;
+    font-size: .70rem !important;
+}
+
+.main-form-container {
+    max-width: 650px !important;
+}
+
+.form-md {
+    max-width: 750px !important;
+}
+
+.text-red {
+    color: red;
+}
+
+.footer {
+    text-align: right;
+    padding: 15px 30px;
+}
+
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 32px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 33px;
+}
+
+.sidebar-menu-icon-child {
+    font-size: 18px !important;
+    margin-right: 5px !important;
+}
+
+.white-space-pre {
+    white-space: pre-wrap;
+}
+
+.swal2-title {
+    font-size: 25px !important;
+}
+
+.swal2-content,
+.swal2-actions {
+    font-size: 15px !important;
+}
+
+.swal2-actions button {
+    margin: 0 5px;
+}
+
+.ql-container {
+    margin-bottom: .5rem !important;
+    height: 200px !important;
+}
+
+.dataTable p {
+    margin-bottom: 0;
+}
+
+#viewModal p {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1200px){
+    [dir=ltr] .layout-default .page__heading:not(.page__heading--xl_small){
+        margin-bottom: 20px;
+    }
+}
