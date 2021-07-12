@@ -18,7 +18,7 @@
                                 <h1 class="text-center mb-0" style="font-size: 20px">FORM <small style="font-size: 18px">Tambah Data</small></h1>
                             </div>
                             <div class="card-body pb-1">
-                                <h5 class="">Informasi Sensor</h5>
+                                <h5 class="" style="margin-bottom: 20px">Informasi Sensor</h5>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -62,9 +62,9 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="margin-bottom: 20px">
                                         <hr style="border-style: dashed">
-                                        <h5 class="">Environment Variables</h5>
+                                        <h5 class="">Environment Variables [Sensor]</h5>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -118,6 +118,21 @@
                                                 <small class="text-red">{{ $errors->first('kafka_topic') }}</small>
                                             @else
                                                 <small class="text-muted">Masukkan nama kafka topic</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-bottom: 20px">
+                                        <hr style="border-style: dashed">
+                                        <h5 class="">Environment Variables [Data Processor]</h5>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="kafka_group">Kafka Group ID</label>
+                                            <input class="form-control" type="text" name="kafka_group" id="kafka_group" placeholder="" value="{{ old('kafka_group') }}">
+                                            @if( $errors->first('kafka_group') )
+                                                <small class="text-red">{{ $errors->first('kafka_group') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan id kafka group</small>
                                             @endif
                                         </div>
                                     </div>

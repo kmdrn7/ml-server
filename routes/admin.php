@@ -40,6 +40,57 @@ Route::group(['middleware' => ['auth:admin']], function()
             'uses' => 'RealtimeSensorController@index',
             'as' => 'admin.realtime-sensor.index',
         ]);
+        Route::get('/view/{id}', [
+            'uses' => 'RealtimeSensorController@show',
+            'as' => 'admin.realtime-sensor.view'
+        ]);
+    });
+
+    Route::group(['prefix' => 'monitor-sensor'], function(){
+        Route::get('/', [
+            'uses' => 'MonitorSensorController@index',
+            'as' => 'admin.monitor-sensor.index',
+        ]);
+        Route::get('/data/{os}/{arch}', [
+            'uses' => 'MonitorSensorController@data',
+            'as' => 'admin.monitor-sensor.data'
+        ]);
+    });
+
+    Route::group(['prefix' => 'ml-model'], function ()
+    {
+        Route::get('/', [
+            'uses' => 'MLModelController@index',
+            'as' => 'admin.ml-model.index'
+        ]);
+        Route::get('/datatable', [
+            'uses' => 'MLModelController@get_datatable',
+            'as' => 'admin.ml-model.dt'
+        ]);
+        Route::get('/add', [
+            'uses' => 'MLModelController@create',
+            'as' => 'admin.ml-model.add'
+        ]);
+        Route::post('/store', [
+            'uses' => 'MLModelController@store',
+            'as' => 'admin.ml-model.store'
+        ]);
+        Route::get('/edit/{id}', [
+            'uses' => 'MLModelController@edit',
+            'as' => 'admin.ml-model.edit'
+        ]);
+        Route::post('/update/{id}', [
+            'uses' => 'MLModelController@update',
+            'as' => 'admin.ml-model.update'
+        ]);
+        Route::post('/delete', [
+            'uses' => 'MLModelController@destroy',
+            'as' => 'admin.ml-model.delete'
+        ]);
+        Route::get('/view/{id}', [
+            'uses' => 'MLModelController@show',
+            'as' => 'admin.ml-model.view'
+        ]);
     });
 
     Route::group(['prefix' => 'sensor'], function ()
@@ -75,6 +126,62 @@ Route::group(['middleware' => ['auth:admin']], function()
         Route::get('/view/{id}', [
             'uses' => 'SensorController@show',
             'as' => 'admin.sensor.view'
+        ]);
+    });
+
+    Route::group(['prefix' => 'sensor-processing'], function ()
+    {
+        Route::get('/', [
+            'uses' => 'SensorProcessingController@index',
+            'as' => 'admin.sensor-processing.index'
+        ]);
+        Route::get('/datatable', [
+            'uses' => 'SensorProcessingController@get_datatable',
+            'as' => 'admin.sensor-processing.dt'
+        ]);
+        Route::get('/add', [
+            'uses' => 'SensorProcessingController@create',
+            'as' => 'admin.sensor-processing.add'
+        ]);
+        Route::post('/store', [
+            'uses' => 'SensorProcessingController@store',
+            'as' => 'admin.sensor-processing.store'
+        ]);
+        Route::get('/edit/{id}', [
+            'uses' => 'SensorProcessingController@edit',
+            'as' => 'admin.sensor-processing.edit'
+        ]);
+        Route::post('/update/{id}', [
+            'uses' => 'SensorProcessingController@update',
+            'as' => 'admin.sensor-processing.update'
+        ]);
+        Route::post('/delete', [
+            'uses' => 'SensorProcessingController@destroy',
+            'as' => 'admin.sensor-processing.delete'
+        ]);
+        Route::get('/view/{id}', [
+            'uses' => 'SensorProcessingController@show',
+            'as' => 'admin.sensor-processing.view'
+        ]);
+    });
+
+    Route::group(['prefix' => 'report-sensor', 'namespace' => 'Report'], function ()
+    {
+        Route::get('/', [
+            'uses' => 'SensorController@index',
+            'as' => 'admin.report-sensor.index'
+        ]);
+        Route::get('/datatable', [
+            'uses' => 'SensorController@get_datatable',
+            'as' => 'admin.report-sensor.dt'
+        ]);
+        Route::get('/view/{id}', [
+            'uses' => 'SensorController@show',
+            'as' => 'admin.report-sensor.view'
+        ]);
+        Route::get('view/{id}/datatable', [
+            'uses' => 'SensorController@get_datatable_view',
+            'as' => 'admin.report-sensor.dt-view'
         ]);
     });
 

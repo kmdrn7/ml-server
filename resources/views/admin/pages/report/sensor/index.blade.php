@@ -10,8 +10,6 @@
 
         <div class="container-fluid page__container">
 
-            <x-admin.index-button-control url="admin.sensor.add" title="sensor"/>
-
             <div class="row mt-0">
                 <div class="col-lg">
                     <div class="card">
@@ -120,20 +118,6 @@
                             <td id="v9" style="white-space: pre-wrap;"></td>
                         </tr>
                         <tr>
-                            <th>How To Build</th>
-                            <td style="white-space: pre-wrap;">
-1. Save dockerfile to a file
-2. Build command
-<b>docker buildx build -f Dockerfile -t [user]/[app-name]:[tag] --platform [platform] --push .</b>
-2.1 Replace user with your username
-2.2 Replce app-name with your own app name
-2.3 Replace tag with your app version or tag
-2.4 Replace platform for specific used (can use multiple platform, separate with ",")
-2.4.1 <b>linux/amd64</b>
-2.4.2 <b>linux/arm/v7</b>
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Last Health Check</th>
                             <td id="v8"></td>
                         </tr>
@@ -158,19 +142,15 @@
 @section('js')
     <script>
         btnView = function(id){
-            return '<div class="btn-group btn-group-sm"><a class="btn btn-warning" data-id="'+id+'" onclick="showData(\''+id+'\')">'
-                    +'<i class="fa fa-eye text-white" aria-hidden="true"></i>';
-                    +'</a>';
+            return '<div class="btn-group btn-group-sm">';
         };
         btnUpdate = function(id){
-            return '<a href="{{ url()->current() }}/edit/'+id+'" class="update-button btn btn-info">'
-                    +'<i class="fa fa-edit" aria-hidden="true"></i>';
+            return '<a href="{{ url()->current() }}/view/'+id+'" class="update-button btn btn-info">'
+                    +'<i class="fa fa-list" aria-hidden="true"></i>&nbsp; Report';
                     +'</a>';
         }
         btnDelete = function(id){
-            return '<a class="btn btn-danger" onclick="deleteButton(\''+id+'\')" data-id="'+id+'">'
-                    +'<i class="fa fa-trash text-white" aria-hidden="true"></i>';
-                    +'</a></div>';
+            return '</div>';
         }
 
         ID_TABLE = 'id'
@@ -222,7 +202,7 @@
                 sortable: false,
                 searchable: false,
                 render: function ( data, type, full, meta ) {
-                    id = full.id;
+                    id = full.serial;
                     return btnView(id) + btnUpdate(id) + btnDelete(id);
                 }
             }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use App\Models\Model;
+use App\Models\Mongo\RealtimeResult;
 use App\Models\Sensor;
 use Illuminate\Support\Facades\Cache;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -25,6 +27,7 @@ class DashboardController extends Controller
     {
         $count = [
             'sensor' => Sensor::count(),
+            'model' => Model::count(),
         ];
 
         $data = [

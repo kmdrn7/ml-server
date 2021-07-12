@@ -28,6 +28,15 @@
                         <div><i class="material-icons icon-muted icon-40pt ml-3">device_hub</i></div>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 card-group-row__col">
+                    <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                        <div class="flex">
+                            <div class="card-header__title text-muted mb-2">Jumlah Model</div>
+                            <div class="text-amount" id="">{{ $count['model'] }} <span style="letter-spacing: 0">model</span></div>
+                        </div>
+                        <div><i class="material-icons icon-muted icon-40pt ml-3">dns</i></div>
+                    </div>
+                </div>
             </div>
 
             {{-- <div class="row card-group-row">

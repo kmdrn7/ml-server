@@ -10,7 +10,7 @@
 
         <div class="container-fluid page__container">
 
-            <x-admin.index-button-control url="admin.sensor.add" title="sensor"/>
+            <x-admin.index-button-control url="admin.ml-model.add" title="model"/>
 
             <div class="row mt-0">
                 <div class="col-lg">
@@ -19,50 +19,22 @@
                             <h4 class="mb-0">{{ $title }}</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="os">OS</label>
-                                        <select name="os" id="os" class="form-control select2">
-                                            <option value="" selected disabled>All</option>
-                                            <option value="Linux">Linux</option>
-                                            <option value="Win">Win</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="arch">Arch</label>
-                                        <select name="arch" id="arch" class="form-control select2">
-                                            <option value="" selected disabled>All</option>
-                                            <option value="AMD64">AMD64</option>
-                                            <option value="ARMv7">ARMv7</option>
-                                            <option value="ARMv8">ARMv8</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style="border-style: dashed; margin-bottom: 20px; margin-top: 10px">
                             <table class="table table-responsive w-100 d-block d-md-table" id="mainDataTable">
                                 <thead>
                                     <tr>
                                         <th width="50" class="text-center">#</th>
-                                        <th>Nama Sensor</th>
-                                        <th>Serial</th>
-                                        <th>OS</th>
-                                        <th>Arch</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Scaler</th>
+                                        <th>Features</th>
                                         <th width="100"><i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">settings</i></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <td></td>
-                                        <td>nama sensor</td>
-                                        <td>serial</td>
-                                        <td>os</td>
-                                        <td>arch</td>
-                                        <td>status</td>
+                                        <td>name</td>
+                                        <td>scaler</td>
+                                        <td>features</td>
                                         <td></td>
                                     </tr>
                                 </tfoot>
@@ -92,50 +64,20 @@
                             <td id="v1"></td>
                         </tr>
                         <tr>
-                            <th>Nama Sensor</th>
+                            <th>Name</th>
                             <td id="v2"></td>
                         </tr>
                         <tr>
-                            <th>Serial</th>
+                            <th>Features</th>
                             <td id="v3"></td>
                         </tr>
                         <tr>
-                            <th>OS</th>
+                            <th>Joblib</th>
                             <td id="v4"></td>
                         </tr>
                         <tr>
-                            <th>Arch</th>
+                            <th>Scaler</th>
                             <td id="v5"></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td id="v6"></td>
-                        </tr>
-                        <tr>
-                            <th>Dockerfile</th>
-                            <td id="v7" style="white-space: pre-wrap;"></td>
-                        </tr>
-                        <tr>
-                            <th>Dockerfile Seer</th>
-                            <td id="v9" style="white-space: pre-wrap;"></td>
-                        </tr>
-                        <tr>
-                            <th>How To Build</th>
-                            <td style="white-space: pre-wrap;">
-1. Save dockerfile to a file
-2. Build command
-<b>docker buildx build -f Dockerfile -t [user]/[app-name]:[tag] --platform [platform] --push .</b>
-2.1 Replace user with your username
-2.2 Replce app-name with your own app name
-2.3 Replace tag with your app version or tag
-2.4 Replace platform for specific used (can use multiple platform, separate with ",")
-2.4.1 <b>linux/amd64</b>
-2.4.2 <b>linux/arm/v7</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Last Health Check</th>
-                            <td id="v8"></td>
                         </tr>
                         <tr>
                             <th>Created At</th>
@@ -175,14 +117,6 @@
 
         ID_TABLE = 'id'
         SELECT_COLUMNS = []
-        AjaxData = {
-            os: () => {
-                return $('#os').val();
-            },
-            arch: () => {
-                return $('#arch').val();
-            }
-        }
         COLUMNS = [
             {
                 targets: [0],
@@ -199,25 +133,14 @@
             },
             {
                 targets: [2],
-                data: "serial"
+                data: "scaler"
             },
             {
                 targets: [3],
-                data: "os"
+                data: "features"
             },
             {
                 targets: [4],
-                data: "arch"
-            },
-            {
-                targets: [5],
-                data: "status",
-                render: function(data){
-                    return data == 1 ? "<div class='btn btn-sm btn-success'>Active</div>" : "<div class='btn btn-sm btn-warning'>Inactive</div>";
-                }
-            },
-            {
-                targets: [6],
                 class: 'text-center',
                 sortable: false,
                 searchable: false,
@@ -241,39 +164,15 @@
                         $('#btnLoading').hide();
                         $('#v1').html(res.data.res.id);
                         $('#v2').html(res.data.res.name);
-                        $('#v3').html(res.data.res.serial);
-                        $('#v4').html(res.data.res.os);
-                        $('#v5').html(res.data.res.arch);
-                        $('#v6').html(res.data.res.status == 1 ? 'Active':'Inactive');
-                        $('#v7').html(res.data.res.dockerfile);
-                        $('#v8').html(res.data.res.last_healthcheck);
-                        $('#v9').html(res.data.res.dockerfile_seer);
+                        $('#v3').html(res.data.res.features);
+                        $('#v4').html(res.data.res.joblib);
+                        $('#v5').html(res.data.res.scaler);
                         $('#vcreated').html(res.data.res.created_at);
                         $('#vupdated').html(res.data.res.updated_at);
                         $('#viewModal').modal('show');
                     }
                 },
-                error: function(xhr, options, err){
-                    $('#btnLoading').hide();
-                    $('#failLoading').show();
-                }
             });
         }
-
-        let inc = 0;
-
-        $(document).on('change', '#os', () => {
-            if (inc!=0){
-                DT.draw()
-            }
-        });
-
-        $(document).on('change', '#arch', () => {
-            if (inc!=0){
-                DT.draw()
-            }
-        });
-
-        inc++;
     </script>
 @endsection

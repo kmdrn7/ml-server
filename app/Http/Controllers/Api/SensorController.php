@@ -18,4 +18,33 @@ class SensorController extends Controller
             'status' => 'OK',
         ], 200);
     }
+
+    public function show($serial)
+    {
+        $sensor = Sensor::where('serial', $serial)
+                ->with(['model'])->first();
+        return response()->json([
+            'status' => 200,
+            'data' => $sensor,
+        ]);
+    }
+
+    public function model($serial)
+    {
+        $sensor = Sensor::where('serial', $serial)
+                ->with(['model'])->first();
+        return response()->download(public_path('storage/file/joblib/'.$sensor->model->joblib));
+    }
+
+    public function config($serial)
+    {
+        $config = Sensor::where('serial', $serial)
+                ->with(['model'])->first()->config;
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'config' => $config,
+            ],
+        ]);
+    }
 }

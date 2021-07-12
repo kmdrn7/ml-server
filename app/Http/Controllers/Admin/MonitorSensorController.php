@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Cache;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class RealtimeSensorController extends Controller
+use function PHPSTORM_META\map;
+
+class MonitorSensorController extends Controller
 {
-    private $title = 'Realtime Sensor';
-    private $subtitle = 'Menunjukkan data sensor secara realtime';
+    private $title = 'Monitor Sensor';
+    private $subtitle = 'Monitoring all sensor in realtime';
     private $app = 'dashboard';
-    private $idh = 'realtime-sensor';
+    private $idh = 'monitor-sensor';
 
     public function index()
     {
@@ -28,7 +30,18 @@ class RealtimeSensorController extends Controller
             'sensor' => $sensor,
         ];
 
-        return view('admin.pages.realtime-sensor.index', $data);
+        return view('admin.pages.monitor-sensor.index', $data);
+    }
+
+    public function data($os, $arch)
+    {
+        if ($os == "all") $os = "";
+        if ($arch == "all") $arch = "";
+        $sensors = Sensor::where('os', 'like', "%$os%")->where('arch', 'like', "%$arch%")->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $sensors,
+        ]);
     }
 
     public function show($serial)

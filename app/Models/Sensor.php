@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Model as ModelML;
 use Illuminate\Database\Eloquent\Model;
 
 class Sensor extends Model
@@ -15,7 +16,15 @@ class Sensor extends Model
         'status',
         'os',
         'arch',
+        'config',
         'dockerfile',
-        'healthcheck'
+        'dockerfile_seer',
+        'healthcheck',
+        'model_id',
     ];
+
+    public function model()
+    {
+        return $this->hasOne(ModelML::class, 'id', 'model_id');
+    }
 }

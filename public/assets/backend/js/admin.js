@@ -586,43 +586,43 @@ $(document).ready(function () {
     })
 
     let Drpfy = $('.dropify').dropify({
-        messages: {
-            'default': 'Drag dan drop sebuah file atau ambil file',
-            'replace': 'Drag dan drop sebuah file atau ambil file untuk mengganti',
-            'remove': 'Buang',
-            'error': 'Ooops, sepertinya ada yang salah'
-        }
+        // messages: {
+        //     'default': 'Drag dan drop sebuah file atau ambil file',
+        //     'replace': 'Drag dan drop sebuah file atau ambil file untuk mengganti',
+        //     'remove': 'Buang',
+        //     'error': 'Ooops, sepertinya ada yang salah'
+        // }
     })
 
-    Drpfy.on('dropify.beforeClear', function (event, element) {
-        if (confirm("Anda yakin ingin menghapus foto ini?")){
-            if ( $(element.element).parent().parent().attr('data-edit') != 'true' ) {
-                $(element.element).parent().parent().remove();
-            }
-            if ( $(element.element).parent().parent().attr('data-page') == 'soal' ) {
-                $('#soal-flag-gambar-deleted').val(1)
-            }
-        }
-    });
+    // Drpfy.on('dropify.beforeClear', function (event, element) {
+    //     if (confirm("Anda yakin ingin menghapus foto ini?")){
+    //         if ( $(element.element).parent().parent().attr('data-edit') != 'true' ) {
+    //             $(element.element).parent().parent().remove();
+    //         }
+    //         if ( $(element.element).parent().parent().attr('data-page') == 'soal' ) {
+    //             $('#soal-flag-gambar-deleted').val(1)
+    //         }
+    //     }
+    // });
 
-    Drpfy.on('dropify.afterClear', function (event, element) {
-        $('#old_foto').val('')
-    });
+    // Drpfy.on('dropify.afterClear', function (event, element) {
+    //     $('#old_foto').val('')
+    // });
 
-    $(document).on('click', '#tambahGambarBarang', function(evt){
-        $('#gambarContainer').append('<div class="col-md-6" style="padding: 0px"><input type="file" class="dropify" name="gambar[]" data-max-file-size="3M" data-height="200" /></div>');
-        Drpfy = $('.dropify').dropify();
-        Drpfy.on('dropify.beforeClear', function(event, element){
-            if (confirm("Anda yakin ingin menghapus foto ini?")){
-                if ( $(element.element).parent().parent().attr('data-edit') != 'true' ) {
-                    $(element.element).parent().parent().remove();
-                }
-            }
-        });
-        Drpfy.on('dropify.afterClear', function (event, element) {
-            $('#old_foto').val('')
-        });
-    });
+    // $(document).on('click', '#tambahGambarBarang', function(evt){
+    //     $('#gambarContainer').append('<div class="col-md-6" style="padding: 0px"><input type="file" class="dropify" name="gambar[]" data-max-file-size="3M" data-height="200" /></div>');
+    //     Drpfy = $('.dropify').dropify();
+    //     Drpfy.on('dropify.beforeClear', function(event, element){
+    //         if (confirm("Anda yakin ingin menghapus foto ini?")){
+    //             if ( $(element.element).parent().parent().attr('data-edit') != 'true' ) {
+    //                 $(element.element).parent().parent().remove();
+    //             }
+    //         }
+    //     });
+    //     Drpfy.on('dropify.afterClear', function (event, element) {
+    //         $('#old_foto').val('')
+    //     });
+    // });
 
     $('.mdk-drawer .simplebar-content').animate({
         scrollTop: $("#sidebar-" + APP).offset().top - 155

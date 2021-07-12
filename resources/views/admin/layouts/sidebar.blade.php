@@ -26,6 +26,12 @@
                         <span class="sidebar-menu-text">Realtime Sensor</span>
                     </a>
                 </li>
+                <li class="sidebar-menu-item {{ $idh=='monitor-sensor'?'active open':'' }}">
+                    <a class="sidebar-menu-button" href="{{ route('admin.monitor-sensor.index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">watch_later</i>
+                        <span class="sidebar-menu-text">Monitoring Sensor</span>
+                    </a>
+                </li>
             </ul>
 
             {{-- <div class="sidebar-heading sidebar-m-t" id="sidebar-master">Home</div>
@@ -38,22 +44,34 @@
                 </li>
             </ul> --}}
 
-            {{-- <div class="sidebar-heading sidebar-m-t" id="sidebar-transaction">Transaction</div>
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item {{ $idh=='data-pesanan'?'active open':'' }}">
-                    <a class="sidebar-menu-button" href="{{ route('admin.order.index') }}">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">date_range</i>
-                        <span class="sidebar-menu-text">Pesanan Layanan</span>
-                    </a>
-                </li>
-            </ul> --}}
-
             <div class="sidebar-heading sidebar-m-t" id="sidebar-management">Management</div>
             <ul class="sidebar-menu">
+                <li class="sidebar-menu-item {{ $idh=='ml-model'?'active open':'' }}">
+                    <a class="sidebar-menu-button" href="{{ route('admin.ml-model.index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dns</i>
+                        <span class="sidebar-menu-text">ML Model</span>
+                    </a>
+                </li>
                 <li class="sidebar-menu-item {{ $idh=='data-sensor'?'active open':'' }}">
                     <a class="sidebar-menu-button" href="{{ route('admin.sensor.index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">device_hub</i>
                         <span class="sidebar-menu-text">Sensor</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item {{ $idh=='sensor-processing'?'active open':'' }}">
+                    <a class="sidebar-menu-button" href="{{ route('admin.sensor-processing.index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">cloud</i>
+                        <span class="sidebar-menu-text">Sensor Processing</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-heading sidebar-m-t" id="sidebar-report">Report</div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item {{ $idh=='report-sensor'?'active open':'' }}">
+                    <a class="sidebar-menu-button" href="{{ route('admin.report-sensor.index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">date_range</i>
+                        <span class="sidebar-menu-text">Report Sensor</span>
                     </a>
                 </li>
             </ul>
@@ -66,7 +84,7 @@
                         <span class="sidebar-menu-text">Admin</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-item {{ $idh=='cache-manager'?'active open':'' }}">
+                {{-- <li class="sidebar-menu-item {{ $idh=='cache-manager'?'active open':'' }}">
                     <a class="sidebar-menu-button" href="{{ route('admin.cache.index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">save</i>
                         <span class="sidebar-menu-text">Cache</span>
@@ -77,7 +95,7 @@
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">build</i>
                         <span class="sidebar-menu-text">Konfigurasi</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sidebar-menu-item">
                     <a class="sidebar-menu-button" href="{{ route('admin.logout') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">close</i>

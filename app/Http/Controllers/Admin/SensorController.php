@@ -14,7 +14,7 @@ class SensorController extends Controller
 {
     private $title = 'Sensor';
     private $subtitle = 'Data Sensor';
-    private $app = 'master';
+    private $app = 'management';
     private $idh = 'data-sensor';
 
     public function index()
@@ -65,7 +65,10 @@ class SensorController extends Controller
         ]);
 
         $serial = Str::uuid();
-        $dockerfile = Dockerfile::where('os', $request->os)->where('arch', $request->arch)->first()->dockerfile;
+        $dockerfile = Dockerfile::where('os', $request->os)
+            ->where('arch', $request->arch)
+            ->where('key', 'depulso')
+            ->first()->dockerfile;
         $dockerfile = str_replace(" ##\n", " $serial\n", $dockerfile);
         $dockerfile = str_replace(" ###\n", " $request->interface\n", $dockerfile);
         $dockerfile = str_replace(" ####\n", " $request->kafka_topic\n", $dockerfile);
@@ -73,13 +76,36 @@ class SensorController extends Controller
         $dockerfile = str_replace(" ######\n", " $request->kafka_port\n", $dockerfile);
         $dockerfile = str_replace(" #######", " $request->mlserver", $dockerfile);
 
+        $dockerfile_seer = Dockerfile::where('os', $request->os)
+            ->where('arch', $request->arch)
+            ->where('key', 'seer')
+            ->first()->dockerfile;
+        $dockerfile_seer = str_replace(" ##\n", " $serial\n", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" ####\n", " $request->mlserver", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" #####\n", " $request->kafka_topic\n", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" ######\n", " $request->kafka_host\n", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" #######\n", " $request->kafka_port\n", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" ########\n", " $request->kafka_client\n", $dockerfile_seer);
+        $dockerfile_seer = str_replace(" #########\n", " $request->kafka_group\n", $dockerfile_seer);
+
+        $config = json_encode([
+            'LISTEN_INTERFACE' => $request->interface,
+            'MLSERVER_URL' => $request->mlserver,
+            'KAFKA_HOST' => $request->kafka_host,
+            'KAFKA_PORT' => $request->kafka_port,
+            'KAFKA_TOPIC' => $request->kafka_topic,
+            'KAFKA_GROUP' => $request->kafka_group,
+        ]);
+
         Sensor::create([
             'serial' => $serial,
             'name' => $input->name,
             'os' => $input->os,
             'arch' => $input->arch,
+            'config' => $config,
             'status' => 0,
             'dockerfile' => $dockerfile,
+            'dockerfile_seer' => $dockerfile_seer,
         ]);
 
         return redirect()->route('admin.sensor.index', ['input_status' => 'success']);
@@ -130,10 +156,24 @@ class SensorController extends Controller
     {
         $input = InputValidator::validateRequest($request, [
             'name' => 'required',
+            'os' => 'required',
+            'arch' => 'required',
+        ]);
+
+        $config = json_encode([
+            'LISTEN_INTERFACE' => $request->interface,
+            'MLSERVER_URL' => $request->mlserver,
+            'KAFKA_HOST' => $request->kafka_host,
+            'KAFKA_PORT' => $request->kafka_port,
+            'KAFKA_TOPIC' => $request->kafka_topic,
+            'KAFKA_GROUP' => $request->kafka_group,
         ]);
 
         $model = Sensor::where('id', $id)->first();
         $model->name = $input->name;
+        $model->os = $input->os;
+        $model->arch = $input->arch;
+        $model->config = $config;
         $model->save();
 
         return redirect()->route('admin.sensor.index', ['update_status' => 'success']);
