@@ -14,6 +14,7 @@ RUN apk -U --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/com
         php-intl \
         php-json \
         php-mbstring \
+        php7-mongodb \
         php-openssl \
         php-opcache \
         php-pdo_mysql \
