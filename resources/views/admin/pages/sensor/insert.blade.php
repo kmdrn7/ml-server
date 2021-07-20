@@ -136,6 +136,28 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mongo_db">MongoDB Database</label>
+                                            <input class="form-control" type="text" name="mongo_db" id="mongo_db" placeholder="" value="{{ old('mongo_db') }}">
+                                            @if( $errors->first('mongo_db') )
+                                                <small class="text-red">{{ $errors->first('mongo_db') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan nama database mongodb</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mongo_col">MongoDB Collection</label>
+                                            <input class="form-control" type="text" name="mongo_col" id="mongo_col" placeholder="" value="{{ old('mongo_col') }}">
+                                            @if( $errors->first('mongo_col') )
+                                                <small class="text-red">{{ $errors->first('mongo_col') }}</small>
+                                            @else
+                                                <small class="text-muted">Masukkan nama collection mongodb</small>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">

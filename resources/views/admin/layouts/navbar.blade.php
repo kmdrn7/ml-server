@@ -12,7 +12,7 @@
                     @if (File::exists(public_path('storage/app_logo.png')))
                         <img class="navbar-brand-icon" src="{{ asset('storage/app_logo.png') }}" height="40" alt="EP" style="background-color: white; padding: 2px 10px; border-radius: 4px">
                     @endif
-                    <span style="border-bottom: 2px solid whitesmoke; padding-bottom: 5px; margin-left: 8px">Admin Dashboard</span>
+                    <span style="border-bottom: 2px solid whitesmoke; padding-bottom: 5px; margin-left: 8px">ML Server Admin Dashboard</span>
                 </a>
 
                 <ul class="nav navbar-nav mr-2 ml-auto d-none d-sm-flex">

@@ -11,7 +11,7 @@
                 @endif
                 <div class="text-center" style="line-height: 35px">
                     {{ config('app.name') }} <br>
-                    Admin Dashboard
+                    ML Server Admin Dashboard
                 </div>
             </a>
         </div>

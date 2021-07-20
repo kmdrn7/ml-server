@@ -95,6 +95,8 @@ class SensorController extends Controller
             'KAFKA_PORT' => $request->kafka_port,
             'KAFKA_TOPIC' => $request->kafka_topic,
             'KAFKA_GROUP' => $request->kafka_group,
+            'MONGODB_DATABASE' => $request->mongo_db,
+            'MONGODB_COLLECTION' => $request->mongo_col,
         ]);
 
         Sensor::create([
@@ -167,6 +169,8 @@ class SensorController extends Controller
             'KAFKA_PORT' => $request->kafka_port,
             'KAFKA_TOPIC' => $request->kafka_topic,
             'KAFKA_GROUP' => $request->kafka_group,
+            'MONGODB_DATABASE' => $request->mongo_db,
+            'MONGODB_COLLECTION' => $request->mongo_col,
         ]);
 
         $model = Sensor::where('id', $id)->first();
